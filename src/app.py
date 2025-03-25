@@ -19,44 +19,7 @@ current_dir = Path(__file__).parent
 app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
         # Add more activities to the in-memory database
-        activities.update({
-            "Basketball": {
-                "description": "Join the basketball team and compete in local tournaments",
-                "schedule": "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
-                "max_participants": 15,
-                "participants": []
-            },
-            "Soccer": {
-                "description": "Practice soccer skills and participate in matches",
-                "schedule": "Mondays and Wednesdays, 3:30 PM - 5:30 PM",
-                "max_participants": 20,
-                "participants": []
-            },
-            "Painting Class": {
-                "description": "Explore your creativity through painting and art techniques",
-                "schedule": "Wednesdays, 3:00 PM - 4:30 PM",
-                "max_participants": 10,
-                "participants": []
-            },
-            "Drama Club": {
-                "description": "Act, direct, and produce plays and performances",
-                "schedule": "Fridays, 4:00 PM - 5:30 PM",
-                "max_participants": 12,
-                "participants": []
-            },
-            "Math Club": {
-                "description": "Solve challenging math problems and prepare for competitions",
-                "schedule": "Thursdays, 3:30 PM - 4:30 PM",
-                "max_participants": 15,
-                "participants": []
-            },
-            "Science Club": {
-                "description": "Conduct experiments and explore scientific concepts",
-                "schedule": "Tuesdays, 4:00 PM - 5:00 PM",
-                "max_participants": 18,
-                "participants": []
-            }
-        })
+       
 # In-memory activity database
 activities = {
     "Chess Club": {
@@ -100,9 +63,10 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specificy activity
     activity = activities[activity_name]
 
-# Validate student is not already signed up
+# Validate student is not already signed up for the activity
     if email in activity["participants"]:
-        return {"message": f"{email} is already signed up for {activity_name}"}
+        return {"message": f"{email} is already signed up for {activity_name}"} 
+    
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
